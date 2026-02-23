@@ -9,19 +9,46 @@ h1 { margin: 0; font-size: 20px; }
 label { display: flex; gap: 8px; align-items: center; font-size: 14px; color: #424245; }
 input, button { border: 1px solid #d8d8dd; border-radius: 10px; padding: 8px 10px; background: #fff; }
 button { cursor: pointer; }
-.week-header { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 8px; font-size: 12px; color: #666; }
+.calendar-shell { --calendar-col-min: 0px; --calendar-cols: repeat(7, minmax(var(--calendar-col-min), 1fr)); --calendar-gap: 6px; display: grid; gap: var(--calendar-gap); width: 100%; }
+.calendar-scroll { overflow-x: hidden; padding-bottom: 4px; }
+.week-header { display: grid; grid-template-columns: var(--calendar-cols); gap: var(--calendar-gap); margin-bottom: 6px; font-size: 16px; font-weight: 600; color: #1d1d1f; }
 .week-header > div, .week-header { text-align: center; }
-.calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(180px, 1fr)); gap: 8px; overflow: auto; }
-.day-cell { border: 1px solid #efeff4; border-radius: 12px; padding: 8px; display: grid; gap: 8px; align-content: start; min-height: 230px; background: #fff; }
+.calendar-grid { display: grid; grid-template-columns: var(--calendar-cols); gap: var(--calendar-gap); width: 100%; grid-auto-rows: minmax(150px, auto); }
+.week-header { width: 100%; }
+.day-cell { border: 1px solid #efeff4; border-radius: 12px; padding: 6px; display: grid; gap: 6px; align-content: start; min-height: 150px; background: #fff; min-width: 0; }
 .day-cell.blank { border-color: transparent; background: transparent; }
 .day-cell.over { background: #fff7f7; }
-.day-head { display: grid; gap: 6px; }
-.drop { min-height: 56px; border: 1px solid #e1e1e7; border-radius: 12px; padding: 6px; display: flex; flex-wrap: wrap; gap: 6px; background: #fafafe; align-content: flex-start; }
+.day-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; }
+.day-top-right { display: inline-flex; align-items: center; gap: 6px; justify-content: flex-end; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70%; }
+.day-date { font-weight: 700; }
+.day-holiday { font-size: 11px; color: #7c6f52; }
+.day-weekend { font-size: 11px; border: 1px solid #d1d5db; border-radius: 999px; padding: 2px 6px; background: #f2f4f8; color: #3f4b5a; }
+.drop { min-height: 44px; border: 1px solid #e1e1e7; border-radius: 12px; padding: 6px; display: flex; flex-wrap: wrap; gap: 6px; background: #fafafe; align-content: flex-start; }
 .redbox { border-color: #ffb3b3; }
 .drop-title { width: 100%; font-size: 11px; color: #666; }
 .chip { border: 1px solid #dbdbe0; border-radius: 999px; padding: 4px 8px; font-size: 12px; background: #fff; user-select: none; }
 .chip.muted { opacity: .7; }
 .badges { display: flex; flex-wrap: wrap; gap: 6px; }
-.badge { font-size: 10px; border: 1px solid #ddd; border-radius: 999px; padding: 1px 7px; color: #555; }
+.badge { font-size: 10px; border: 1px solid #ddd; border-radius: 999px; padding: 2px 8px; color: #555; }
 .badge.red { color: #b00020; border-color: #ffb3b3; background: #fff5f5; }
 .issues { min-height: 16px; }
+
+.panel h2 { margin: 0 0 8px; font-size: 16px; }
+.panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.employee-list { display: grid; gap: 8px; }
+.employee-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; border: 1px solid #efeff4; border-radius: 10px; padding: 8px 10px; background: #fafafa; }
+.employee-name-input { border: 1px solid #d8d8dd; border-radius: 10px; padding: 6px 8px; min-width: 120px; }
+.employee-del { border: 1px solid #ffb3b3; color: #b00020; padding: 4px 8px; border-radius: 8px; background: #fff; }
+.estimate { display: grid; gap: 4px; }
+.estimate-value { font-size: 20px; font-weight: 700; }
+.estimate-note { font-size: 12px; color: #666; }
+
+.day-cell { overflow: hidden; }
+.required-input { width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; text-overflow: ellipsis; }
+.holiday-desc { font-size: 11px; color: #7c6f52; line-height: 1.2; }
+.badge.holiday { border-color: #ffd7a3; background: #fff3e0; color: #8a4b00; font-weight: 700; }
+.badge.weekday-holiday { border-color: #ffcf66; background: #ffe6a3; color: #7a3d00; }
+.badge.weekend { border-color: #d1d5db; background: #f2f4f8; color: #3f4b5a; }
+.badges.top-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; max-width: 70%; }
+.badge-desc { font-size: 10px; color: #7c6f52; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.month-label { font-size: 12px; color: #666; }
