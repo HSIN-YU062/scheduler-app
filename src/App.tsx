@@ -116,7 +116,7 @@ const dayMs = 24 * 60 * 60 * 1000;
 const toDate = (s: string) => new Date(`${s}T00:00:00`);
 const fmt = (d: Date) => d.toISOString().slice(0, 10);
 const monthKey = (s: string) => s.slice(0, 7);
-const csvEscape = (v: string | number | boolean) => `"${String(v).split('"')join('""')}"`;
+const csvEscape = (v: string | number | boolean) => `"${String(v).split('"').join('""')}"`;
 
 function getISOWeekKey(dateStr: string): string {
   const d = toDate(dateStr);
